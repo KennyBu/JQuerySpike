@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("p").fadeTo("slow",0.25);
+
+        $("#hideButton").click(function () {
+            $("p").hide("slow");
+            //$("p.kentest").hide();
+            //$("#para1").hide();
+            //$("p").css("background-color", "yellow");
+        });
+
+        $("#showButton").click(function () {
+            $("p").show("slow");
+        });
+
+        $("#toggleButton").click(function () {
+            $("p").toggle("fast");
+        });
+    });
+</script>
+
+<h2>This is a heading</h2>
+<p class="kentest">This is a paragraph.</p>
+<p id="para1">This is another paragraph.</p>
+<button id="hideButton">Hide</button>
+<button id="showButton">Show</button>
+<button id="toggleButton">Toggle</button>
