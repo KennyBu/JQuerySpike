@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+	#sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
+	#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $("#sortable1, #sortable2").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
+        $("#submit-list").button();
+
+        $("#submit-list").click(function () {
+            $.ajax({
+                url: '/Positioning/PositionList/',
+                data: { listIds: $("#sortable1").sortable('toArray') },
+                type: 'POST',
+                traditional: true
+            });
+        });
+
+    });
+</script>
+
+<fieldset>
+<legend>Positioning</legend>
+
+<ul id="sortable1" class="connectedSortable">
+	<li id="1" class="ui-state-default">Item 1</li>
+	<li id="2" class="ui-state-default">Item 2</li>
+	<li id="3" class="ui-state-default">Item 3</li>
+	<li id="4" class="ui-state-default">Item 4</li>
+	<li id="5" class="ui-state-default">Item 5</li>
+</ul>
+
+<ul id="sortable2" class="connectedSortable">
+	<li class="ui-state-highlight">Item 1</li>
+	<li class="ui-state-highlight">Item 2</li>
+	<li class="ui-state-highlight">Item 3</li>
+	<li class="ui-state-highlight">Item 4</li>
+	<li class="ui-state-highlight">Item 5</li>
+</ul>
+</fieldset>
+<button id="submit-list">Send To Controller</button>
+
