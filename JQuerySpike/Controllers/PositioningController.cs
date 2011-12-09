@@ -17,9 +17,13 @@ namespace JQuerySpike.Controllers
         }
 
         [HttpPost]
-        public EmptyResult PositionList(List<int> listIds)
+        public EmptyResult PositionList(List<int> headerItems, List<int> navigationItems,
+            List<int> bodyItems, List<int> footerItems)
         {
-            var firstId = listIds.FirstOrDefault();
+            var headerFirstId = headerItems.FirstOrDefault();
+            var navigationFirstId = navigationItems.FirstOrDefault();
+            var bodyFirstId = bodyItems.FirstOrDefault();
+            var footerFirstId = footerItems.FirstOrDefault();
 
             return new EmptyResult();
         }

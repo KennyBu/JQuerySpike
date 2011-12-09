@@ -1,50 +1,116 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Layout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-	#sortable1, #sortable2 { list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
-	#sortable1 li, #sortable2 li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+<style type="text/css">    
+	#availableItems, #headerItems, #navigationItems, #bodyItems, #footerItems { list-style-type: none; margin: 5px; padding: 5px; float: left; 
+	                                                                            margin-right: 10px; background: #5dafd4; padding: 10px; width: 143px;}
+	#availableItems li, #headerItems li, #navigationItems li, #bodyItems li, #footerItems li { margin: 0 5px 5px 5px; padding: 5px; 
+	                                                                                           font-size: 1em; width: 100px; }
+    fieldset { margin: 0 5px 5px 5px; padding: 5px; font-size: 1em; height: 300px; width: 200px; float:none}    
+    
+    #left-nav-control{float:left;}
+    #container{width:600px;margin:0 auto;}
+    #header{}
+    #left-nav{float:left;width:300px;}
+    #mainContent{float:left;width:300px;}
+    #footer{}
+    .clearfloat{clear:both;height:0;line-height:0;}	                                                                                           
+	
 </style>
+
+
 
 <script type="text/javascript">
     $(function () {
-        $("#sortable1, #sortable2").sortable({
+        $("#availableItems, #headerItems, #navigationItems, #bodyItems, #footerItems").sortable({
             connectWith: ".connectedSortable"
         }).disableSelection();
 
         $("#submit-list").button();
 
+        
         $("#submit-list").click(function () {
             $.ajax({
                 url: '/Positioning/PositionList/',
-                data: { listIds: $("#sortable1").sortable('toArray') },
+                data: { 
+                    headerItems: $("#headerItems").sortable('toArray'),
+                    navigationItems: $("#navigationItems").sortable('toArray'),
+                    bodyItems: $("#bodyItems").sortable('toArray'),
+                    footerItems: $("#footerItems").sortable('toArray')
+                },
                 type: 'POST',
                 traditional: true
             });
         });
-
     });
 </script>
 
-<fieldset>
-<legend>Positioning</legend>
 
-<ul id="sortable1" class="connectedSortable">
+<div style="float:left; font-size: 1.2em; font-weight:bold" >
+<img alt="Layout" src="../../Content/layouticon.jpg" style="vertical-align:middle" />
+Choose a Layout
+</div>
+<br /><br /><br />
+
+
+<div id="left-nav-control">
+<fieldset>
+<legend>Available Items</legend>
+<ul id="availableItems" class="connectedSortable">
 	<li id="1" class="ui-state-default">Item 1</li>
 	<li id="2" class="ui-state-default">Item 2</li>
 	<li id="3" class="ui-state-default">Item 3</li>
 	<li id="4" class="ui-state-default">Item 4</li>
 	<li id="5" class="ui-state-default">Item 5</li>
 </ul>
+</fieldset>
+<div>
+    <button id="submit-list">Apply Layout</button>
+</div>
+</div>
 
-<ul id="sortable2" class="connectedSortable">
-	<li class="ui-state-highlight">Item 1</li>
-	<li class="ui-state-highlight">Item 2</li>
-	<li class="ui-state-highlight">Item 3</li>
-	<li class="ui-state-highlight">Item 4</li>
-	<li class="ui-state-highlight">Item 5</li>
+
+<div id="container">
+<div id="header">
+<fieldset>
+<legend>Header Items</legend>
+<ul id="headerItems" class="connectedSortable">	
 </ul>
 </fieldset>
-<button id="submit-list">Send To Controller</button>
+<!-- end header --></div>
+
+<br class="clearfloat" />
+
+<div id="left-nav">
+
+<fieldset>
+<legend>Navigation Items</legend>
+<ul id="navigationItems" class="connectedSortable">	
+</ul>
+</fieldset>
+
+</div>
+
+
+
+<div id="mainContent">
+<fieldset>
+<legend>Body Items</legend>
+<ul id="bodyItems" class="connectedSortable">	
+</ul>
+</fieldset>
+
+</div>
+<br class="clearfloat" />
+
+<div id="footer">
+
+<fieldset>
+<legend>Footer Items</legend>
+<ul id="footerItems" class="connectedSortable">	
+</ul>
+</fieldset>
+</div>
+</div>
 
